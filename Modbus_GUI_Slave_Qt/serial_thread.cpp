@@ -169,7 +169,7 @@ void Serial_Thread::data_analys()
                 for (int j = 0; j < qobject_cast<Modbus_Server_GUI_App*>(qobject_cast<Main_Widget*>(parent())->parentWidget())->slaves[slave_index]->holding_registers_table->rowCount(); ++j){
                     if (qobject_cast<Modbus_Server_GUI_App*>(qobject_cast<Main_Widget*>(parent())->parentWidget())->slaves[slave_index]->holding_registers_table->verticalHeaderItem(j)->text() == QString::number(register_addr, 16)){
                         QDataStream reg_data(&responce_data, QIODevice::Append);
-                        reg_data << qobject_cast<Modbus_Server_GUI_App*>(qobject_cast<Main_Widget*>(parent())->parentWidget())->slaves[slave_index]->holding_registers_table->item(j, 0)->text().toShort();
+                        reg_data << qobject_cast<Modbus_Server_GUI_App*>(qobject_cast<Main_Widget*>(parent())->parentWidget())->slaves[slave_index]->holding_registers_table->item(j, 0)->text().toUShort();
                         register_addr++;
                         find_registers = true;
                         break;
@@ -296,7 +296,7 @@ void Serial_Thread::data_analys()
                 for (int j = 0; j < qobject_cast<Modbus_Server_GUI_App*>(qobject_cast<Main_Widget*>(parent())->parentWidget())->slaves[slave_index]->input_registers_table->rowCount(); ++j){
                     if (qobject_cast<Modbus_Server_GUI_App*>(qobject_cast<Main_Widget*>(parent())->parentWidget())->slaves[slave_index]->input_registers_table->verticalHeaderItem(j)->text() == QString::number(register_addr, 16)){
                         QDataStream reg_data(&responce_data, QIODevice::Append);
-                        reg_data << qobject_cast<Modbus_Server_GUI_App*>(qobject_cast<Main_Widget*>(parent())->parentWidget())->slaves[slave_index]->input_registers_table->item(j, 0)->text().toShort();
+                        reg_data << qobject_cast<Modbus_Server_GUI_App*>(qobject_cast<Main_Widget*>(parent())->parentWidget())->slaves[slave_index]->input_registers_table->item(j, 0)->text().toUShort();
                         register_addr++;
                         find_registers = true;
                         break;
@@ -432,7 +432,7 @@ void Serial_Thread::data_analys()
                 find_registers = false;
                 for (int j = 0; j < qobject_cast<Modbus_Server_GUI_App*>(qobject_cast<Main_Widget*>(parent())->parentWidget())->slaves[slave_index]->coils_registers_table->rowCount(); ++j){
                     if (qobject_cast<Modbus_Server_GUI_App*>(qobject_cast<Main_Widget*>(parent())->parentWidget())->slaves[slave_index]->coils_registers_table->verticalHeaderItem(j)->text() == QString::number(register_addr, 16)){
-                        response_data_bits_list[data_list_index].set(data_counter, qobject_cast<Modbus_Server_GUI_App*>(qobject_cast<Main_Widget*>(parent())->parentWidget())->slaves[slave_index]->coils_registers_table->item(j, 0)->text().toShort());
+                        response_data_bits_list[data_list_index].set(data_counter, qobject_cast<Modbus_Server_GUI_App*>(qobject_cast<Main_Widget*>(parent())->parentWidget())->slaves[slave_index]->coils_registers_table->item(j, 0)->text().toUShort());
                         register_addr++;
                         find_registers = true;
                         break;
@@ -580,7 +580,7 @@ void Serial_Thread::data_analys()
                 find_registers = false;
                 for (int j = 0; j < qobject_cast<Modbus_Server_GUI_App*>(qobject_cast<Main_Widget*>(parent())->parentWidget())->slaves[slave_index]->discrete_inputs_registers_table->rowCount(); ++j){
                     if (qobject_cast<Modbus_Server_GUI_App*>(qobject_cast<Main_Widget*>(parent())->parentWidget())->slaves[slave_index]->discrete_inputs_registers_table->verticalHeaderItem(j)->text() == QString::number(register_addr, 16)){
-                        response_data_bits_list[data_list_index].set(data_counter, qobject_cast<Modbus_Server_GUI_App*>(qobject_cast<Main_Widget*>(parent())->parentWidget())->slaves[slave_index]->discrete_inputs_registers_table->item(j, 0)->text().toShort());
+                        response_data_bits_list[data_list_index].set(data_counter, qobject_cast<Modbus_Server_GUI_App*>(qobject_cast<Main_Widget*>(parent())->parentWidget())->slaves[slave_index]->discrete_inputs_registers_table->item(j, 0)->text().toUShort());
                         register_addr++;
                         find_registers = true;
                         break;
@@ -1271,7 +1271,7 @@ void Serial_Thread::data_analys()
                     for (int j = 0; j < qobject_cast<Modbus_Server_GUI_App*>(qobject_cast<Main_Widget*>(parent())->parentWidget())->slaves[slave_index]->holding_registers_table->rowCount(); ++j){
                         if (qobject_cast<Modbus_Server_GUI_App*>(qobject_cast<Main_Widget*>(parent())->parentWidget())->slaves[slave_index]->holding_registers_table->verticalHeaderItem(j)->text() == QString::number(read_register_addr, 16)){
                             QDataStream reg_data(&responce_data, QIODevice::Append);
-                            reg_data << qobject_cast<Modbus_Server_GUI_App*>(qobject_cast<Main_Widget*>(parent())->parentWidget())->slaves[slave_index]->holding_registers_table->item(j, 0)->text().toShort();
+                            reg_data << qobject_cast<Modbus_Server_GUI_App*>(qobject_cast<Main_Widget*>(parent())->parentWidget())->slaves[slave_index]->holding_registers_table->item(j, 0)->text().toUShort();
                             read_register_addr++;
                             find_registers = true;
                             break;
@@ -1362,7 +1362,7 @@ void Serial_Thread::data_analys()
             bool register_find = false;
             for (int i = 0; i < qobject_cast<Modbus_Server_GUI_App*>(qobject_cast<Main_Widget*>(parent())->parentWidget())->slaves[slave_index]->holding_registers_table->rowCount(); ++i){
                 if (qobject_cast<Modbus_Server_GUI_App*>(qobject_cast<Main_Widget*>(parent())->parentWidget())->slaves[slave_index]->holding_registers_table->verticalHeaderItem(i)->text() == QString::number(register_addr, 16)){
-                    qobject_cast<Modbus_Server_GUI_App*>(qobject_cast<Main_Widget*>(parent())->parentWidget())->slaves[slave_index]->holding_registers_table->item(i, 0)->setText(QString::number((qobject_cast<Modbus_Server_GUI_App*>(qobject_cast<Main_Widget*>(parent())->parentWidget())->slaves[slave_index]->holding_registers_table->item(i, 0)->text().toShort() & and_mask_value) | or_mask_value));
+                    qobject_cast<Modbus_Server_GUI_App*>(qobject_cast<Main_Widget*>(parent())->parentWidget())->slaves[slave_index]->holding_registers_table->item(i, 0)->setText(QString::number((qobject_cast<Modbus_Server_GUI_App*>(qobject_cast<Main_Widget*>(parent())->parentWidget())->slaves[slave_index]->holding_registers_table->item(i, 0)->text().toUShort() & and_mask_value) | or_mask_value));
                     register_find = true;
                 }
             }

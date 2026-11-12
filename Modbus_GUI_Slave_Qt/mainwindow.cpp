@@ -486,6 +486,7 @@ void Main_Widget::save_model_exec()
 
 void Main_Widget::com_reset_slot()
 {
+    com_combo->clear();
     const auto serialPortInfos = QSerialPortInfo::availablePorts();
     for (const QSerialPortInfo& portInfo : serialPortInfos) {
         com_combo->addItem(portInfo.portName());
